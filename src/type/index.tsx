@@ -11,6 +11,11 @@ export type FoodCardProps = {
     category: string
 }
 
+export type InputProps = {
+    type: string
+    placeholder: string
+}
+
 export type User = {
     _id: string
     email: string

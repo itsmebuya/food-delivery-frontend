@@ -1,6 +1,7 @@
 'use client'
 
-import { useRouter } from "next/router";
+
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const AuthenticationProvider = ({
@@ -20,7 +21,7 @@ export const AuthenticationProvider = ({
         setLoading(false)
     }, []);
 
-    if(loading) {
+    if (loading) {
         return <div>...loading</div>
     }
 
