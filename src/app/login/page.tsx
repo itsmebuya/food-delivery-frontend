@@ -14,14 +14,14 @@ export default function Home() {
             console.log(error);
         }
     }
-
+    
     useEffect(() => {
         getEmail();
     }, [])
 
     return (
         <div className="w-screen flex h-screen items-center justify-around gap-6 bg-white" >
-            <div>
+            <div className="w-[20%]">
                 <Login />
             </div>
 

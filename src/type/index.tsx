@@ -16,6 +16,10 @@ export type InputProps = {
     placeholder: string
 }
 
+export type LoginButtonProps = {
+    handleLogin: () => void
+}
+
 export type User = {
     _id: string
     email: string
