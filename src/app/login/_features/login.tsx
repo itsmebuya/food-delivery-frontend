@@ -1,14 +1,27 @@
 'use client'
 
+import { useRouter } from "next/navigation"
 import { ForgotPassword } from "../_components/forgotPassword"
 import { LoginInput } from "../_components/input"
 import { LoginButton } from "../_components/loginButton"
+import { loginRequest } from "@/utils/loginReq"
 
 export const Login = () => {
+    const router = useRouter();
 
-    const handleLogin = () => {
-        
-    }
+    const handleLogin = async (values: {email: string, password: string}) => {
+        const {email, password} = values;
+
+        try {
+            const response = await loginRequest({email, password})
+            if(response) {
+                console.log(response);
+                
+            }
+        } catch (error) {
+            console.log("Error fetching data: ", error);
+        }
+    };
 
     return (
         <div className="flex flex-col gap-6 w-[100%]">

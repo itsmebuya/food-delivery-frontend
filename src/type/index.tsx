@@ -20,6 +20,11 @@ export type LoginButtonProps = {
     handleLogin: () => void
 }
 
+export type loginRequestParams = {
+    email: string
+    password: string
+}
+
 export type User = {
     _id: string
     email: string
