@@ -11,11 +11,6 @@ export type FoodCardProps = {
     category: string
 }
 
-export type InputProps = {
-    type: string
-    placeholder: string
-}
-
 export type LoginButtonProps = {
     handleLogin: () => void
 }
