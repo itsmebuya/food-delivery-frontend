@@ -1,23 +1,10 @@
 'use client'
 
 import { useRouter } from "next/navigation"
-import { useEffect } from "react";
 import { Login } from "./_features/login";
 
 export default function Home() {
     const router = useRouter();
-
-    const getEmail = async () => {
-        try {
-            // const response = await
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    
-    useEffect(() => {
-        getEmail();
-    }, [])
 
     return (
         <div className="w-screen flex h-screen items-center justify-around gap-6 bg-white" >

@@ -1,4 +1,4 @@
-import { JSX } from "react"
+import { Dispatch, JSX, SetStateAction } from "react"
 
 export type MenuCardProps = {
     title: string
@@ -20,13 +20,23 @@ export type loginRequestParams = {
     password: string
 }
 
+export type SignUpProps = {
+    fields: {password:string,email:string}
+    setFields: Dispatch<SetStateAction<Fields>>
+    setPage: Dispatch<SetStateAction<number>>
+}
+export type Fields = {
+    email: string
+    password: string
+}
+
 export type User = {
     _id: string
     email: string
     password: string
     phoneNumber: number
     address: string
-    role: string 
+    role: string
     orderedFoods: string
     ttl: Date
     isVerified: boolean
@@ -37,7 +47,7 @@ export type User = {
 export type Food = {
     _id: string
     foodName: string
-    price: number 
+    price: number
     image: string
     ingredients: string
     category: string

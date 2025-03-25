@@ -10,6 +10,10 @@ import { loginSchema } from "@/schema"
 export const Login = () => {
     const router = useRouter();
 
+    const handleSignUpRedirect = () => {
+        router.push("/signup");
+    }
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -22,13 +26,11 @@ export const Login = () => {
                 const response = await loginRequest({ email, password });
                 console.log(response)
                 localStorage.setItem("token", response.token)
-                if(response.role === "ADMIN") {
+                if (response.role === "ADMIN") {
                     router.push("http://localhost:3000");
                 } else {
                     router.push("/");
                 }
-                
-
             } catch (error) {
                 console.log("Error fetching data: ", error);
             }
@@ -68,7 +70,12 @@ export const Login = () => {
             </div>
             <LoginButton handleLogin={formik.handleSubmit} />
             <div className="flex justify-center">
-                Don't have an account? 
+                Don't have an account? <span 
+                    className="text-blue-500 cursor-pointer" 
+                    onClick={handleSignUpRedirect}
+                >
+                    Sign up
+                </span>
             </div>
         </div>
     )

@@ -1,19 +1,25 @@
 'use client'
 
 import { useRouter } from "next/navigation"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { SignUp } from "./_features/signup";
+import { Confirm } from "./_features/confirmPassword";
+import { Fields } from "@/type";
+import { signUpRequest } from "@/utils/loginReq";
 
 export default function Home() {
     const router = useRouter();
-
-    useEffect(() => {
-
-    }, [])
-
+    const [fields, setFields] = useState<Fields>({
+        email: '',
+        password: '',
+      });
+    const [page, setPage] = useState(1);
+    
     return (
         <div className="w-screen flex h-screen items-center justify-around gap-6 bg-white" >
             <div className="w-[20%]">
-                
+                {page == 1 && <SignUp setFields={setFields} fields={fields} setPage= {setPage}/>}
+                {page == 2 && < Confirm fields={fields} setFields={setFields} setPage={setPage} />}
             </div>
 
             <div className="w-[60%] h-[90%]">
