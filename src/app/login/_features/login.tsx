@@ -24,13 +24,14 @@ export const Login = () => {
             const { email, password } = values;
             try {
                 const response = await loginRequest({ email, password });
-                console.log(response)
                 localStorage.setItem("token", response.token)
+                localStorage.setItem("role", response.role)
                 if (response.role === "ADMIN") {
                     router.push("http://localhost:3000");
                 } else {
                     router.push("/");
                 }
+                
             } catch (error) {
                 console.log("Error fetching data: ", error);
             }
