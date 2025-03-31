@@ -25,7 +25,9 @@ export const Login = () => {
             try {
                 const response = await loginRequest({ email, password });
                 localStorage.setItem("token", response.token)
-                localStorage.setItem("role", response.role)
+                localStorage.setItem("userData", JSON.stringify(response.userData))
+                console.log(response);
+                
                 if (response.role === "ADMIN") {
                     router.push("http://localhost:3000");
                 } else {
