@@ -1,12 +1,12 @@
 'use client'
 
-import { UserContextType } from "@/type/providerType"
+import { UserContextType, UserType } from "@/type/providerType";
 import { createContext, useContext, useEffect, useState } from "react"
 
-const UserContext = createContext<UserContextType | undefined>(undefined)
+const UserContext = createContext<UserContextType>({} as UserContextType )
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-    const [user, setUser] = useState<UserContextType | undefined>(undefined)
+    const [user, setUser] = useState<UserType>({} as UserType)
 
     useEffect(() => {
         const user = localStorage.getItem("userData");
@@ -14,7 +14,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ email: user?.email, role: user?.role }}>
+        <UserContext.Provider value={{user }}>
             {user ? children : <div>...Loading </div>}
         </UserContext.Provider>
     )

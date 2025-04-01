@@ -1,9 +1,13 @@
+"use client"
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthenticationProvider } from "@/provider/authentication";
 import { UserProvider } from "@/provider/userProvider";
 import { CategoryProvider } from "@/provider/categoryProvider";
+import { FoodProvider } from "@/provider/foodProvider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,28 +19,34 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "NomNom swift delivery",
-  description: "NomNom swift delivery",
-};
+// export const metadata: Metadata = {
+//   title: "NomNom swift delivery",
+//   description: "NomNom swift delivery",
+// };
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const queryClient = new QueryClient()
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthenticationProvider>
-          <UserProvider>
-            <CategoryProvider>
-              {children}
-            </CategoryProvider>
-          </UserProvider>
-        </AuthenticationProvider>
+        <QueryClientProvider client={queryClient}>
+          <AuthenticationProvider>
+            <UserProvider>
+              <CategoryProvider>
+                <FoodProvider>
+                  {children}
+                </FoodProvider>
+              </CategoryProvider>
+            </UserProvider>
+          </AuthenticationProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );

@@ -1,9 +1,9 @@
 "use client"
 
-import { CategoryContextType, CategoryType } from "@/type/providerType";
+import { CategoryContextType } from "@/type/providerType";
 import { getCategory } from "@/utils/categoryRequest";
-import { createContext, useContext, useEffect, useState } from "react"
-
+import { createContext, useContext } from "react"
+import { useQuery } from "@tanstack/react-query"
 
 const CategoryContext = createContext<CategoryContextType>({} as CategoryContextType);
 
@@ -12,29 +12,23 @@ export const CategoryProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
-    const [categories, setCategories] = useState<CategoryType[]>([])
-    const fetchCategory = async () => {
-        try {
-            const response = await getCategory()
-            setCategories(response)
-            console.log(response);
-
-        } catch (error) {
-            console.log(error);
-
-        }
+    const fetchCategories = async () => {
+        const categoryData = await getCategory();
+        return categoryData;
     }
 
-    useEffect(() => {
-        fetchCategory
-    }, [])
+    const {
+        data: categories ,
+        error,
+        isLoading,
+        isError, 
+        refetch
+    } = useQuery({ queryKey: ['categories'], queryFn: fetchCategories });
 
     return (
-        <CategoryContext.Provider value={{ categories: categories, refetch: fetchCategory }}>
-
+        <CategoryContext.Provider value={{ categories: categories, refetch: refetch }}>
             {categories ? children : <div>...Loading categories</div>}
         </CategoryContext.Provider>
-
     );
 };
 

@@ -10,16 +10,11 @@ export const loginRequest = async ({ email, password }: loginRequestParams) => {
 }
 
 export const signUpRequest = async ({ email, password }: loginRequestParams) => {
-    console.log(email);
-    
     const  data  = await instance.post("/users", { email, password })
-    console.log(data);
-    
     return data
 }
 
 export const checkEmail = async (email: string) => {
     const { data } = await instance.post("/users/check", {email})
-    
     return data
 }
