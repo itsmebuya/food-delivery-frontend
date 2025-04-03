@@ -12,30 +12,14 @@ export const FoodProvider = ({
 }: {
     children: React.ReactNode;
 }) => {
-    const fetchFoods = async() => {
+    const fetchFoods = async () => {
         const foodData = await getFood();
         return foodData
     }
 
     const {
-        data: foods 
+        data: foods
     } = useQuery({ queryKey: ['foods'], queryFn: fetchFoods });
-
-
-    // const [foods, setFoods] = useState<FoodType[]>([])
-    // const fetchFoods = async () => {
-    //     try {
-    //         const response = await getFood()
-    //         setFoods(response)
-    //         console.log(response);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     fetchFoods
-    // }, [])
 
     return (
         <FoodContext.Provider value={{ foods: foods, refetch: fetchFoods }}>
