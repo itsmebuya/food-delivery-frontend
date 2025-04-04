@@ -1,34 +1,31 @@
-"use client"
+"use client";
 
 import { FoodContextType, FoodType } from "@/type/providerType";
 import { getFood } from "@/utils/foodRequest";
 import { useQuery } from "@tanstack/react-query";
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react";
 
 const FoodContext = createContext<FoodContextType>({} as FoodContextType);
 
-export const FoodProvider = ({
-    children,
-}: {
-    children: React.ReactNode;
-}) => {
-    const fetchFoods = async () => {
-        const foodData = await getFood();
-        return foodData
-    }
+export const FoodProvider = ({ children }: { children: React.ReactNode }) => {
+  const fetchFoods = async () => {
+    const foodData = await getFood();
+    return foodData;
+  };
 
-    const {
-        data: foods
-    } = useQuery({ queryKey: ['foods'], queryFn: fetchFoods });
+  const { data: foods } = useQuery({
+    queryKey: ["foods"],
+    queryFn: fetchFoods,
+  });
 
-    return (
-        <FoodContext.Provider value={{ foods: foods, refetch: fetchFoods }}>
-            {foods ? children : <div>...Loading foods</div>}
-        </FoodContext.Provider>
-    );
+  return (
+    <FoodContext.Provider value={{ foods: foods, refetch: fetchFoods }}>
+      {children}
+    </FoodContext.Provider>
+  );
 };
 
 export const useFoods = () => {
-    const context = useContext(FoodContext);
-    return context
-}
+  const context = useContext(FoodContext);
+  return context;
+};
