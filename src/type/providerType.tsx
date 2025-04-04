@@ -16,6 +16,7 @@ export type CategoryType = {
 
 export type CategoryContextType = {
     categories: CategoryType[];
+    isLoading:boolean
     refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<any, Error>>;
 }
 
@@ -30,5 +31,6 @@ export type FoodType = {
 
 export type FoodContextType = {
     foods: FoodType[]
+    isLoading: boolean
     refetch: () => Promise<void>
 }

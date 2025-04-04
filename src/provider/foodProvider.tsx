@@ -13,13 +13,15 @@ export const FoodProvider = ({ children }: { children: React.ReactNode }) => {
     return foodData;
   };
 
-  const { data: foods } = useQuery({
+  const { data: foods, isLoading } = useQuery({
     queryKey: ["foods"],
     queryFn: fetchFoods,
   });
 
   return (
-    <FoodContext.Provider value={{ foods: foods, refetch: fetchFoods }}>
+    <FoodContext.Provider
+      value={{ foods: foods, refetch: fetchFoods, isLoading }}
+    >
       {children}
     </FoodContext.Provider>
   );

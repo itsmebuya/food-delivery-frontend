@@ -29,7 +29,7 @@ export const CategoryProvider = ({
 
   return (
     <CategoryContext.Provider
-      value={{ categories: categories, refetch: refetch }}
+      value={{ categories: categories, refetch: refetch, isLoading }}
     >
       {children}
     </CategoryContext.Provider>
